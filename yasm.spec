@@ -24,32 +24,33 @@ Yasm is a complete rewrite of the NASM assembler under the "new"
 BSD License (some portions are under other licenses, see COPYING for
 details). It is designed from the ground up to allow for multiple
 assembler syntaxes to be supported (eg, NASM, TASM, GAS, etc.) in
-addition to multiple output object formats and even multiple instruction
-sets. Another primary module of the overall design is an optimizer module.
+addition to multiple output object formats and even multiple
+instruction sets. Another primary module of the overall design is an
+optimizer module.
 
-#%description -l pl
-# TODO
+%description -l pl
+Yasm to ca³kowite przepisanie asemblera NASM na "nowej" licencji BSD
+(niektóre fragmenty s± na innych licencjach, szczegó³y w pliku
+COPYING). Jest zaprojektowany od podstaw, aby umo¿liwiæ obs³ugê
+wielu sk³adni asemblera (np. NASM, TASM, GAS itd.), a ponadto wiele
+formatów obiektów wyj¶ciowych, a nawet wiele zestawów instrukcji.
+Kolejny g³ówny modu³ ogólnego projektu to modu³ optymalizatora.
 
 %package -n libyasm
 Summary:	YASM - libyasm
-#Summary(pl):	-
+Summary(pl):	YASM - biblioetka libyasm
 Group:		Libraries
 
 %description -n libyasm
-YASM - libyasm
+YASM - libyasm.
 
-#%description -n libyasm -l pl
-# TODO
+%description -n libyasm -l pl
+YASM - biblioteka libyasm.
 
 %prep
 %setup -q
 
 %build
-#%%{__gettextize}
-#%%{__aclocal}
-#%%{__autoconf}
-#%%{__autoheader}
-#%%{__automake}
 %configure \
 	%{?debug:--enable-debug}
 %{__make}
@@ -76,10 +77,9 @@ rm -rf $RPM_BUILD_ROOT
 
 #%files devel
 %{_includedir}/*
-#%attr(755,root,root) %{_libdir}/yasm/*.la
 
 #%files static
-#%attr(755,root,root) %{_libdir}/yasm/*.a
 
 %files -n libyasm
-%{_libdir}/lib*.so.*.*.*
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
