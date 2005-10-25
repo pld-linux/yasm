@@ -2,11 +2,12 @@ Summary:	The YASM Modular Assembler
 Summary(pl):	Modularny assembler YASM
 Name:		yasm
 Version:	0.4.0
-Release:	0.1
+Release:	1
 License:	distributable (BSD, GPL, LGPL, Artistic; see COPYING)
 Group:		Development/Tools
 Source0:	http://www.tortall.net/projects/yasm/releases/%{name}-%{version}.tar.gz
 # Source0-md5:	2360e20c4e105ba95f4e9135a7901183
+Patch0:		%{name}-segv.patch
 URL:		http://www.tortall.net/projects/yasm/
 BuildRequires:	bison >= 1.25
 # convenience is used in frontend
@@ -69,6 +70,7 @@ Statyczna biblioteka libyasm.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %configure \
