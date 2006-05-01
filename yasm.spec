@@ -75,7 +75,8 @@ Statyczna biblioteka libyasm.
 %build
 %configure \
 	%{?debug:--enable-debug}
-%{__make}
+
+%{__make} all check
 
 %install
 rm -rf $RPM_BUILD_ROOT
