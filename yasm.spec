@@ -1,19 +1,16 @@
 Summary:	The YASM Modular Assembler
 Summary(pl):	Modularny assembler YASM
 Name:		yasm
-Version:	0.4.0
+Version:	0.5.0
 Release:	1
 License:	distributable (BSD, GPL, LGPL, Artistic; see COPYING)
 Group:		Development/Tools
 Source0:	http://www.tortall.net/projects/yasm/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	2360e20c4e105ba95f4e9135a7901183
-Patch0:		%{name}-segv.patch
+# Source0-md5:	d4931fcce497bd4f80ed349384704240
 URL:		http://www.tortall.net/projects/yasm/
 BuildRequires:	bison >= 1.25
-# convenience is used in frontend
-#BuildRequires:	libltdl-devel
 BuildRequires:	xmlto
-Requires:	libyasm = %{version}-%{release}
+Obsoletes:	libyasm
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -33,44 +30,22 @@ wielu sk³adni asemblera (np. NASM, TASM, GAS itd.), a ponadto wiele
 formatów obiektów wyj¶ciowych, a nawet wiele zestawów instrukcji.
 Kolejny g³ówny modu³ ogólnego projektu to modu³ optymalizatora.
 
-%package -n libyasm
-Summary:	YASM - libyasm
-Summary(pl):	YASM - biblioetka libyasm
-Group:		Libraries
-
-%description -n libyasm
-YASM - libyasm.
-
-%description -n libyasm -l pl
-YASM - biblioteka libyasm.
-
 %package -n libyasm-devel
-Summary:	Header files for libyasm library
-Summary(pl):	Pliki nag³ówkowe biblioteki libyasm
+Summary:	Header files and static libyasm library
+Summary(pl):	Pliki nag³ówkowe i statyczna biblioteka libyasm
 Group:		Development/Libraries
-Requires:	libyasm = %{version}-%{release}
+License:	BSD+Artistic or LGPL or GPL (see COPYING)
+Obsoletes:	libyasm
+Obsoletes:	libyasm-static
 
 %description -n libyasm-devel
-Header files for libyasm library.
+Header files and static libyasm library.
 
 %description -n libyasm-devel -l pl
-Pliki nag³ówkowe biblioteki libyasm.
-
-%package -n libyasm-static
-Summary:	Static libyasm library
-Summary(pl):	Statyczna biblioteka libyasm
-Group:		Development/Libraries
-Requires:	libyasm-devel = %{version}-%{release}
-
-%description -n libyasm-static
-Static libyasm library.
-
-%description -n libyasm-static -l pl
-Statyczna biblioteka libyasm.
+Pliki nag³ówkowe i statyczna biblioteka libyasm.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %configure \
@@ -84,33 +59,18 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/yasm/*.{la,a}
-
 %clean
 rm -rf $RPM_BUILD_ROOT
-
-%post	-n libyasm -p /sbin/ldconfig
-%postun	-n libyasm -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS BSD.txt COPYING
 %attr(755,root,root) %{_bindir}/*
-%dir %{_libdir}/yasm
-%attr(755,root,root) %{_libdir}/yasm/*.so
 %{_mandir}/man[17]/*
-
-%files -n libyasm
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libyasm.so.*.*.*
 
 %files -n libyasm-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libyasm.so
-%{_libdir}/libyasm.la
+%doc AUTHORS BSD.txt COPYING
+%{_libdir}/libyasm.a
 %{_includedir}/libyasm.h
 %{_includedir}/libyasm
-
-%files -n libyasm-static
-%defattr(644,root,root,755)
-%{_libdir}/libyasm.a
