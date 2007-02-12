@@ -1,5 +1,5 @@
 Summary:	The YASM Modular Assembler
-Summary(pl.UTF-8):   Modularny assembler YASM
+Summary(pl.UTF-8):	Modularny assembler YASM
 Name:		yasm
 Version:	0.5.0
 Release:	1
@@ -32,7 +32,7 @@ Kolejny główny moduł ogólnego projektu to moduł optymalizatora.
 
 %package -n libyasm-devel
 Summary:	Header files and static libyasm library
-Summary(pl.UTF-8):   Pliki nagłówkowe i statyczna biblioteka libyasm
+Summary(pl.UTF-8):	Pliki nagłówkowe i statyczna biblioteka libyasm
 Group:		Development/Libraries
 License:	BSD+Artistic or LGPL or GPL (see COPYING)
 Obsoletes:	libyasm
