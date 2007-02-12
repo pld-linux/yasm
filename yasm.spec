@@ -1,5 +1,5 @@
 Summary:	The YASM Modular Assembler
-Summary(pl):	Modularny assembler YASM
+Summary(pl.UTF-8):   Modularny assembler YASM
 Name:		yasm
 Version:	0.5.0
 Release:	1
@@ -22,17 +22,17 @@ addition to multiple output object formats and even multiple
 instruction sets. Another primary module of the overall design is an
 optimizer module.
 
-%description -l pl
-Yasm to ca≥kowite przepisanie asemblera NASM na "nowej" licencji BSD
-(niektÛre fragmenty s± na innych licencjach, szczegÛ≥y w pliku
-COPYING). Jest zaprojektowany od podstaw, aby umoøliwiÊ obs≥ugÍ
-wielu sk≥adni asemblera (np. NASM, TASM, GAS itd.), a ponadto wiele
-formatÛw obiektÛw wyj∂ciowych, a nawet wiele zestawÛw instrukcji.
-Kolejny g≥Ûwny modu≥ ogÛlnego projektu to modu≥ optymalizatora.
+%description -l pl.UTF-8
+Yasm to ca≈Çkowite przepisanie asemblera NASM na "nowej" licencji BSD
+(niekt√≥re fragmenty sƒÖ na innych licencjach, szczeg√≥≈Çy w pliku
+COPYING). Jest zaprojektowany od podstaw, aby umo≈ºliwiƒá obs≈Çugƒô
+wielu sk≈Çadni asemblera (np. NASM, TASM, GAS itd.), a ponadto wiele
+format√≥w obiekt√≥w wyj≈õciowych, a nawet wiele zestaw√≥w instrukcji.
+Kolejny g≈Ç√≥wny modu≈Ç og√≥lnego projektu to modu≈Ç optymalizatora.
 
 %package -n libyasm-devel
 Summary:	Header files and static libyasm library
-Summary(pl):	Pliki nag≥Ûwkowe i statyczna biblioteka libyasm
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe i statyczna biblioteka libyasm
 Group:		Development/Libraries
 License:	BSD+Artistic or LGPL or GPL (see COPYING)
 Obsoletes:	libyasm
@@ -41,8 +41,8 @@ Obsoletes:	libyasm-static
 %description -n libyasm-devel
 Header files and static libyasm library.
 
-%description -n libyasm-devel -l pl
-Pliki nag≥Ûwkowe i statyczna biblioteka libyasm.
+%description -n libyasm-devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe i statyczna biblioteka libyasm.
 
 %prep
 %setup -q
