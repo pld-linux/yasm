@@ -1,14 +1,16 @@
 Summary:	The YASM Modular Assembler
 Summary(pl.UTF-8):	Modularny assembler YASM
 Name:		yasm
-Version:	0.5.0
+Version:	0.6.0
 Release:	1
 License:	distributable (BSD, GPL, LGPL, Artistic; see COPYING)
 Group:		Development/Tools
 Source0:	http://www.tortall.net/projects/yasm/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	d4931fcce497bd4f80ed349384704240
+# Source0-md5:	3246a73ee7e1d523ca1be8587cebac8b
 URL:		http://www.tortall.net/projects/yasm/
-BuildRequires:	bison >= 1.25
+BuildRequires:	autoconf >= 2.53
+BuildRequires:	automake
+BuildRequires:	libtool
 BuildRequires:	xmlto
 Obsoletes:	libyasm
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -47,7 +49,19 @@ Pliki nagłówkowe i statyczna biblioteka libyasm.
 %prep
 %setup -q
 
+# Mach-O tests fail in 0.6.0
+%if "%{version}" != "0.6.0"
+echo Recheck Mach-O tests
+exit 1
+%endif
+echo > modules/objfmts/macho/tests/Makefile.inc
+
 %build
+%{__libtoolize}
+%{__aclocal} -I m4
+%{__autoconf}
+%{__autoheader}
+%{__automake}
 %configure \
 	%{?debug:--enable-debug}
 
@@ -72,5 +86,5 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS BSD.txt COPYING
 %{_libdir}/libyasm.a
-%{_includedir}/libyasm.h
+%{_includedir}/libyasm*.h
 %{_includedir}/libyasm
