@@ -1,12 +1,12 @@
 Summary:	The YASM Modular Assembler
 Summary(pl.UTF-8):	Modularny assembler YASM
 Name:		yasm
-Version:	0.6.0
+Version:	0.6.1
 Release:	1
 License:	distributable (BSD, GPL, LGPL, Artistic; see COPYING)
 Group:		Development/Tools
 Source0:	http://www.tortall.net/projects/yasm/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	3246a73ee7e1d523ca1be8587cebac8b
+# Source0-md5:	2add4f9253681d1dc6084c6676b98468
 URL:		http://www.tortall.net/projects/yasm/
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake
@@ -48,13 +48,6 @@ Pliki nagłówkowe i statyczna biblioteka libyasm.
 
 %prep
 %setup -q
-
-# Mach-O tests fail in 0.6.0
-%if "%{version}" != "0.6.0"
-echo Recheck Mach-O tests
-exit 1
-%endif
-echo > modules/objfmts/macho/tests/Makefile.inc
 
 %build
 %{__libtoolize}
