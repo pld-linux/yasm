@@ -1,18 +1,18 @@
 Summary:	The YASM Modular Assembler
-Summary(pl):	Modularny assembler YASM
+Summary(pl.UTF-8):	Modularny assembler YASM
 Name:		yasm
-Version:	0.4.0
-Release:	0.1
+Version:	0.6.2
+Release:	1
 License:	distributable (BSD, GPL, LGPL, Artistic; see COPYING)
 Group:		Development/Tools
 Source0:	http://www.tortall.net/projects/yasm/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	2360e20c4e105ba95f4e9135a7901183
+# Source0-md5:	a9d5508702991de2bdd0903b8ba680ba
 URL:		http://www.tortall.net/projects/yasm/
-BuildRequires:	bison >= 1.25
-# convenience is used in frontend
-#BuildRequires:	libltdl-devel
+BuildRequires:	autoconf >= 2.53
+BuildRequires:	automake
+BuildRequires:	libtool
 BuildRequires:	xmlto
-Requires:	libyasm = %{version}-%{release}
+Obsoletes:	libyasm
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -24,56 +24,41 @@ addition to multiple output object formats and even multiple
 instruction sets. Another primary module of the overall design is an
 optimizer module.
 
-%description -l pl
-Yasm to ca≥kowite przepisanie asemblera NASM na "nowej" licencji BSD
-(niektÛre fragmenty s± na innych licencjach, szczegÛ≥y w pliku
-COPYING). Jest zaprojektowany od podstaw, aby umoøliwiÊ obs≥ugÍ
-wielu sk≥adni asemblera (np. NASM, TASM, GAS itd.), a ponadto wiele
-formatÛw obiektÛw wyj∂ciowych, a nawet wiele zestawÛw instrukcji.
-Kolejny g≥Ûwny modu≥ ogÛlnego projektu to modu≥ optymalizatora.
-
-%package -n libyasm
-Summary:	YASM - libyasm
-Summary(pl):	YASM - biblioetka libyasm
-Group:		Libraries
-
-%description -n libyasm
-YASM - libyasm.
-
-%description -n libyasm -l pl
-YASM - biblioteka libyasm.
+%description -l pl.UTF-8
+Yasm to ca≈Çkowite przepisanie asemblera NASM na "nowej" licencji BSD
+(niekt√≥re fragmenty sƒÖ na innych licencjach, szczeg√≥≈Çy w pliku
+COPYING). Jest zaprojektowany od podstaw, aby umo≈ºliwiƒá obs≈Çugƒô
+wielu sk≈Çadni asemblera (np. NASM, TASM, GAS itd.), a ponadto wiele
+format√≥w obiekt√≥w wyj≈õciowych, a nawet wiele zestaw√≥w instrukcji.
+Kolejny g≈Ç√≥wny modu≈Ç og√≥lnego projektu to modu≈Ç optymalizatora.
 
 %package -n libyasm-devel
-Summary:	Header files for libyasm library
-Summary(pl):	Pliki nag≥Ûwkowe biblioteki libyasm
+Summary:	Header files and static libyasm library
+Summary(pl.UTF-8):	Pliki nag≈Ç√≥wkowe i statyczna biblioteka libyasm
 Group:		Development/Libraries
-Requires:	libyasm = %{version}-%{release}
+License:	BSD+Artistic or LGPL or GPL (see COPYING)
+Obsoletes:	libyasm
+Obsoletes:	libyasm-static
 
 %description -n libyasm-devel
-Header files for libyasm library.
+Header files and static libyasm library.
 
-%description -n libyasm-devel -l pl
-Pliki nag≥Ûwkowe biblioteki libyasm.
-
-%package -n libyasm-static
-Summary:	Static libyasm library
-Summary(pl):	Statyczna biblioteka libyasm
-Group:		Development/Libraries
-Requires:	libyasm-devel = %{version}-%{release}
-
-%description -n libyasm-static
-Static libyasm library.
-
-%description -n libyasm-static -l pl
-Statyczna biblioteka libyasm.
+%description -n libyasm-devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe i statyczna biblioteka libyasm.
 
 %prep
 %setup -q
 
 %build
+%{__libtoolize}
+%{__aclocal} -I m4
+%{__autoconf}
+%{__autoheader}
+%{__automake}
 %configure \
 	%{?debug:--enable-debug}
-%{__make}
+
+%{__make} -j1 all check
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -81,33 +66,18 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/yasm/*.{la,a}
-
 %clean
 rm -rf $RPM_BUILD_ROOT
-
-%post	-n libyasm -p /sbin/ldconfig
-%postun	-n libyasm -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS BSD.txt COPYING
 %attr(755,root,root) %{_bindir}/*
-%dir %{_libdir}/yasm
-%attr(755,root,root) %{_libdir}/yasm/*.so
 %{_mandir}/man[17]/*
-
-%files -n libyasm
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libyasm.so.*.*.*
 
 %files -n libyasm-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libyasm.so
-%{_libdir}/libyasm.la
-%{_includedir}/libyasm.h
-%{_includedir}/libyasm
-
-%files -n libyasm-static
-%defattr(644,root,root,755)
+%doc AUTHORS BSD.txt COPYING
 %{_libdir}/libyasm.a
+%{_includedir}/libyasm*.h
+%{_includedir}/libyasm
