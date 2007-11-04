@@ -58,7 +58,7 @@ Pliki nagłówkowe i statyczna biblioteka libyasm.
 %configure \
 	%{?debug:--enable-debug}
 
-%{__make} all check
+%{__make} -j1 all check
 
 %install
 rm -rf $RPM_BUILD_ROOT
