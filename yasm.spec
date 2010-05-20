@@ -1,12 +1,12 @@
 Summary:	The YASM Modular Assembler
 Summary(pl.UTF-8):	Modularny assembler YASM
 Name:		yasm
-Version:	0.8.0
+Version:	1.0.1
 Release:	1
 License:	distributable (BSD, GPL, LGPL, Artistic; see COPYING)
 Group:		Development/Tools
 Source0:	http://www.tortall.net/projects/yasm/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	84a72204c9b452a00b39b1b00495163f
+# Source0-md5:	2174fc3b6b74de07667f42d47514c336
 URL:		http://www.tortall.net/projects/yasm/
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake
