@@ -1,12 +1,12 @@
 Summary:	The YASM Modular Assembler
 Summary(pl.UTF-8):	Modularny assembler YASM
 Name:		yasm
-Version:	1.0.1
+Version:	1.1.0
 Release:	1
 License:	distributable (BSD, GPL, LGPL, Artistic; see COPYING)
 Group:		Development/Tools
 Source0:	http://www.tortall.net/projects/yasm/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	2174fc3b6b74de07667f42d47514c336
+# Source0-md5:	8392e5f2235c2c2a981e1a633f2698cb
 URL:		http://www.tortall.net/projects/yasm/
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake
@@ -72,8 +72,11 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS BSD.txt COPYING
-%attr(755,root,root) %{_bindir}/*
-%{_mandir}/man[17]/*
+%attr(755,root,root) %{_bindir}/vsyasm
+%attr(755,root,root) %{_bindir}/yasm
+%attr(755,root,root) %{_bindir}/ytasm
+%{_mandir}/man1/yasm.1*
+%{_mandir}/man7/yasm*.7*
 
 %files -n libyasm-devel
 %defattr(644,root,root,755)
