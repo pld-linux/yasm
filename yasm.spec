@@ -10,6 +10,7 @@ Source0:	http://www.tortall.net/projects/yasm/releases/%{name}-%{version}.tar.gz
 URL:		http://www.tortall.net/projects/yasm/
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake
+BuildRequires:	gettext-devel
 BuildRequires:	libtool
 BuildRequires:	xmlto
 Obsoletes:	libyasm
