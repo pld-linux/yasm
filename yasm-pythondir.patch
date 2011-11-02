@@ -1,0 +1,15 @@
+--- yasm-1.2.0/tools/python-yasm/Makefile.inc.orig	2011-08-28 01:13:19.000000000 +0200
++++ yasm-1.2.0/tools/python-yasm/Makefile.inc	2011-11-02 18:32:12.466545874 +0100
+@@ -62,10 +62,10 @@
+ CLEANFILES += .python-build
+ 
+ python-install: .python-build
+-	$(PYTHON) `test -f tools/python-yasm/setup.py || echo '$(srcdir)/'`tools/python-yasm/setup.py install "--install-lib=$(DESTDIR)$(pythondir)"
++	$(PYTHON) `test -f tools/python-yasm/setup.py || echo '$(srcdir)/'`tools/python-yasm/setup.py install "--install-lib=$(DESTDIR)$(pyexecdir)"
+ 
+ python-uninstall:
+-	rm -f `$(PYTHON) -c "import sys;sys.path.insert(0, '${DESTDIR}${pythondir}'); import yasm; print yasm.__file__"`
++	rm -f `$(PYTHON) -c "import sys;sys.path.insert(0, '${DESTDIR}${pyexecdir}'); import yasm; print yasm.__file__"`
+ 
+ else
+ 

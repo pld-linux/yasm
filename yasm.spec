@@ -1,17 +1,19 @@
 Summary:	The YASM Modular Assembler
 Summary(pl.UTF-8):	Modularny assembler YASM
 Name:		yasm
-Version:	1.1.0
+Version:	1.2.0
 Release:	1
 License:	distributable (BSD, GPL, LGPL, Artistic; see COPYING)
 Group:		Development/Tools
 Source0:	http://www.tortall.net/projects/yasm/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	8392e5f2235c2c2a981e1a633f2698cb
+# Source0-md5:	4cfc0686cf5350dd1305c4d905eb55a6
+Patch0:		%{name}-pythondir.patch
 URL:		http://www.tortall.net/projects/yasm/
 BuildRequires:	autoconf >= 2.53
-BuildRequires:	automake
+BuildRequires:	automake >= 1:1.9.6
 BuildRequires:	gettext-devel
 BuildRequires:	libtool
+BuildRequires:	python-Cython >= 0.11.3
 BuildRequires:	xmlto
 Obsoletes:	libyasm
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -47,8 +49,21 @@ Header files and static libyasm library.
 %description -n libyasm-devel -l pl.UTF-8
 Pliki nagłówkowe i statyczna biblioteka libyasm.
 
+%package -n python-yasm
+Summary:	Python interface for yasm library
+Summary(pl.UTF-8):	Pythonowy interfejs do biblioteki yasm
+Group:		Libraries/Python
+License:	BSD+Artistic or LGPL or GPL (see COPYING)
+
+%description -n python-yasm
+Python interface for yasm library.
+
+%description -n python-yasm -l pl.UTF-8
+Pythonowy interfejs do biblioteki yasm.
+
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -57,7 +72,8 @@ Pliki nagłówkowe i statyczna biblioteka libyasm.
 %{__autoheader}
 %{__automake}
 %configure \
-	%{?debug:--enable-debug}
+	%{?debug:--enable-debug} \
+	--enable-python-bindings
 
 %{__make} -j1 all check
 
@@ -85,3 +101,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libyasm.a
 %{_includedir}/libyasm*.h
 %{_includedir}/libyasm
+
+%files -n python-yasm
+%defattr(644,root,root,755)
+%attr(755,root,root) %{py_sitedir}/yasm.so
+%{py_sitedir}/yasm-0.0-py*.egg-info
