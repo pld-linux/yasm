@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_without	python		# without Python bindings
+
 Summary:	The YASM Modular Assembler
 Summary(pl.UTF-8):	Modularny assembler YASM
 Name:		yasm
@@ -13,7 +17,7 @@ BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake >= 1:1.9.6
 BuildRequires:	gettext-devel
 BuildRequires:	libtool
-BuildRequires:	python-Cython >= 0.11.3
+%{?with_python:BuildRequires:	python-Cython >= 0.11.3}
 BuildRequires:	xmlto
 Obsoletes:	libyasm
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -73,7 +77,7 @@ Pythonowy interfejs do biblioteki yasm.
 %{__automake}
 %configure \
 	%{?debug:--enable-debug} \
-	--enable-python-bindings
+	%{?with_python:--enable-python-bindings}
 
 %{__make} -j1 all check
 
@@ -102,7 +106,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/libyasm*.h
 %{_includedir}/libyasm
 
+%if %{with python}
 %files -n python-yasm
 %defattr(644,root,root,755)
 %attr(755,root,root) %{py_sitedir}/yasm.so
 %{py_sitedir}/yasm-0.0-py*.egg-info
+%endif
