@@ -15,7 +15,7 @@ Patch0:		%{name}-pythondir.patch
 URL:		http://www.tortall.net/projects/yasm/
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake >= 1:1.9.6
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	libtool
 %{?with_python:BuildRequires:	python-Cython >= 0.11.3}
 BuildRequires:	xmlto
