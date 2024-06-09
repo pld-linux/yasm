@@ -2,15 +2,20 @@
 # Conditional build:
 %bcond_without	python		# without Python bindings
 
+%define		commit		9defefae9fbcb6958cddbfa778c1ea8605da8b8b
+%define		shortcommit	9defefa
+%define		commitdate	20230922
+
 Summary:	The YASM Modular Assembler
 Summary(pl.UTF-8):	Modularny assembler YASM
 Name:		yasm
 Version:	1.3.0
-Release:	3
+Release:	3.%{commitdate}.1
 License:	distributable (BSD, GPL, LGPL, Artistic; see COPYING)
 Group:		Development/Tools
-Source0:	http://www.tortall.net/projects/yasm/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	fc9e586751ff789b34b1f21d572d96af
+#Source0:	http://www.tortall.net/projects/yasm/releases/%{name}-%{version}.tar.gz
+Source0:	https://github.com/yasm/yasm/archive/%{commit}/yasm-%{shortcommit}.tar.gz
+# Source0-md5:	3155260395dce87fab5daecea624aba8
 Patch0:		%{name}-pythondir.patch
 URL:		http://www.tortall.net/projects/yasm/
 BuildRequires:	autoconf >= 2.53
@@ -66,7 +71,7 @@ Python interface for yasm library.
 Pythonowy interfejs do biblioteki yasm.
 
 %prep
-%setup -q
+%setup -q -n yasm-%{commit}
 %patch0 -p1
 
 %build
