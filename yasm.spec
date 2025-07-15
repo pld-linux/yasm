@@ -72,7 +72,7 @@ Pythonowy interfejs do biblioteki yasm.
 
 %prep
 %setup -q -n yasm-%{commit}
-%patch0 -p1
+%patch -P0 -p1
 
 %build
 %{__libtoolize}
