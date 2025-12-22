@@ -17,7 +17,7 @@ Group:		Development/Tools
 Source0:	https://github.com/yasm/yasm/archive/%{commit}/yasm-%{shortcommit}.tar.gz
 # Source0-md5:	3155260395dce87fab5daecea624aba8
 Patch0:		%{name}-pythondir.patch
-URL:		http://www.tortall.net/projects/yasm/
+URL:		https://github.com/yasm/yasm
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake >= 1:1.9.6
 BuildRequires:	gettext-tools
