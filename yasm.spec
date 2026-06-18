@@ -80,6 +80,7 @@ Pythonowy interfejs do biblioteki yasm.
 %{__autoconf}
 %{__autoheader}
 %{__automake}
+export CFLAGS="%{rpmcflags} -std=gnu11"
 %configure \
 	%{?debug:--enable-debug} \
 	%{?with_python:--enable-python-bindings}
