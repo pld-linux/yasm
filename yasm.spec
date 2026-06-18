@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without	python		# without Python bindings
+%bcond_with	python		# without Python bindings
 
 %define		commit		9defefae9fbcb6958cddbfa778c1ea8605da8b8b
 %define		shortcommit	9defefa
@@ -25,6 +25,7 @@ BuildRequires:	libtool
 %{?with_python:BuildRequires:	python-Cython >= 0.11.3}
 BuildRequires:	xmlto
 Obsoletes:	libyasm
+%{!?with_python:Obsoletes:	python-yasm < 1.3.0-4}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
