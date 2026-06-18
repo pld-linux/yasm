@@ -83,7 +83,10 @@ Pythonowy interfejs do biblioteki yasm.
 export CFLAGS="%{rpmcflags} -std=gnu11"
 %configure \
 	%{?debug:--enable-debug} \
-	%{?with_python:--enable-python-bindings}
+%if %{with python}
+	PYTHON="%{__python}" \
+	--enable-python-bindings
+%endif
 
 %{__make} -j1 all check
 
